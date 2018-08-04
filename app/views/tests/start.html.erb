@@ -1,0 +1,87 @@
+<div class="container">
+  <h2 class="text-primary">
+    <div class="center-block countdown">
+    </div>
+  </h2>
+</div>
+
+<%= form_tag test_result_path(@test), {method: :get} do %>
+<div id="demo" class="carousel" data-ride="carousel" data-interval="false">
+  <!-- The slideshow -->
+  <div class="">
+  
+  <% @q_details.each_with_index do |q_detail, index|%>
+    <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+      <div class="container-fluid">
+        <!-- Control the column width, and how they should appear on different devices -->
+        <div class="row">
+          <div class="col-sm-12" style="background-color:yellow;">Question:<%= index+1%> <%= q_detail[:question_title][1]%></div>
+        </div>
+        <br>
+        <!-- Or let Bootstrap automatically handle the layout -->
+        <div class="row">
+          <div class="col-sm" style="background-color:yellow;"><%= q_detail[:option_titles][0] ? q_detail[:option_titles][0][1] : ''%>
+            <%= (radio_button_tag q_detail[:question_title][0], q_detail[:option_titles][0][0]) if q_detail[:option_titles][0] %>
+          </div>
+          <div class="col-sm" style="background-color:orange;"><%= q_detail[:option_titles][1] ? q_detail[:option_titles][1][1] : ''%>
+            <%= (radio_button_tag q_detail[:question_title][0], q_detail[:option_titles][1][0]) if q_detail[:option_titles][1] %>
+          </div>
+          <div class="col-sm" style="background-color:yellow;"><%= q_detail[:option_titles][2] ? q_detail[:option_titles][2][1] : ''%>
+            <%= (radio_button_tag q_detail[:question_title][0], q_detail[:option_titles][2][0]) if q_detail[:option_titles][2] %>
+          </div>
+          <div class="col-sm" style="background-color:orange;"><%= q_detail[:option_titles][3] ? q_detail[:option_titles][3][1] : ''%>
+            <%= (radio_button_tag q_detail[:question_title][0], q_detail[:option_titles][3][0]) if q_detail[:option_titles][3] %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="float-left" href="#demo" data-slide="prev">
+        <button type="button" class="btn btn-primary ">Previous</button>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="center-block">
+        <%= submit_tag 'Finish', {class: "btn btn-success"} %>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="float-right" href="#demo" data-slide="next">
+        <button type="button" class="btn btn-primary">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<script type="text/javascript">
+  var timer2 = "<%= @test.time_required%>:0";
+  var interval = setInterval(function() {
+    var timer = timer2.split(':');
+    //by parsing integer, I avoid all extra string processing
+    var minutes = parseInt(timer[0], 10);
+    var seconds = parseInt(timer[1], 10);
+    --seconds;
+    minutes = (seconds < 0) ? --minutes : minutes;
+    if (minutes < 0) clearInterval(interval);
+    seconds = (seconds < 0) ? 59 : seconds;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+    //minutes = (minutes < 10) ?  minutes : minutes;
+    if ((minutes == 0)&& (seconds == 0))
+    {
+      clearInterval(interval);
+      $("form input[type=submit]").click();
+    }
+    else
+      {
+        $('.countdown').html(minutes + ' minutes ' + ': ' + seconds + ' seconds remaining to complete the test!!!');
+        timer2 = minutes + ':' + seconds;
+      }
+  }, 1000);
+</script>

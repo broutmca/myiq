@@ -1,0 +1,21 @@
+<%= form_with(model: test, local: true) do |form| %>
+  <% if test.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+
+      <ul>
+      <% test.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  Category: <%= form.select :subject_id, options_for_select(Subject.all.map{|s|[s.title, s.id]}) %><br/>
+  Time Required(In minutes): <%= form.number_field :time_required %><br/>
+  Number of Questions: <%= form.number_field :number_of_questions %><br/>
+  User: <%= form.select :user_id, options_for_select(User.all.map{|s|[s.email, s.id]}, current_user.id),{},{:disabled => true} %><br/><br/> 
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

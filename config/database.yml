@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  pool: 25
+  host: localhost
+  username: biswaranjanrout
+  password:
+
+development:
+  <<: *default
+  database: myiq_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: myiq_development
+
+production:
+  <<: *default
+  database: myiq_development

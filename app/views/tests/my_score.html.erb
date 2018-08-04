@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>My Score</h2>
+  <p>You have attempt <%= @total_attempts %> Questions, Correct ansers
+   <%= @correct_answers %>, Wrong answers <%= @wrong_answers %>
+   , Not Attempt  <%= @total_questions - @correct_answers -  @wrong_answers%>
+  </p>
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Question</th>
+        <th>User Attempt</th>
+        <th>Correct Answer given by me?</th>
+        <th>Correct Answer</th>
+        <th>My Answer</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <% @my_score_board.each do |my_score|  %>   
+      <tr class="<%= my_score[:class_name]%>">
+        <td><%= my_score[:question]%></td>
+        <td><%= my_score[:user_attempt] ? 'Yes' : 'No'%></td>
+        <td><%= my_score[:is_correct?]? 'Yes' : 'No'%></td>
+        <td><%= my_score[:correct_answer]%></td>
+        <td><%= my_score[:user_answer]%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

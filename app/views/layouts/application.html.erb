@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myiq</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render :partial => 'layouts/header' %>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+    </div>
+    <%= yield %>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+    </div>
+  </body>
+</html>
