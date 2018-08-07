@@ -11,7 +11,7 @@ class Test < ApplicationRecord
     question_details = []
     questions.each_with_index do |q, index|
       answer = q.answers.limit(1)
-      options = q.options.where.not(id: answer.first.id).where.not(title: answer.first.title).order("RAND()").limit(3).map(&:id)
+      options = q.options.where.not(id: answer.first.id).where.not(title: answer.first.title).order("random()").limit(3).map(&:id)
       options << answer.first.id
       options.shuffle!
       question_details << {question_number: index+1 , question_id: q.id, option_ids: options, answer_id: answer.first.id}
