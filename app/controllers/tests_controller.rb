@@ -97,7 +97,7 @@ class TestsController < ApplicationController
   # POST /tests.json
   def create
     @test = Test.new(test_params)
-    @test.update_question_details(test_params)
+    @test.update_question_details(test_params) if @test.valid?
     respond_to do |format|
       if @test.save
         format.html { redirect_to @test, notice: 'Test was successfully created.' }

@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_with(model: test, local: true) do |form| %>
   <% if test.errors.any? %>
     <div id="error_explanation">
@@ -10,12 +11,44 @@
       </ul>
     </div>
   <% end %>
-  Category: <%= form.select :subject_id, options_for_select(Subject.all.map{|s|[s.title, s.id]}) %><br/>
-  Time Required(In minutes): <%= form.number_field :time_required %><br/>
-  Number of Questions: <%= form.number_field :number_of_questions %><br/>
-  User: <%= form.select :user_id, options_for_select(User.all.map{|s|[s.email, s.id]}, current_user.id),{},{:disabled => true} %><br/><br/> 
+  <div class="form-group row">
+    <label for="subject" class="col-xs-3 col-form-label mr-2">Category:</label>
+    <div class="col-xs-9">
+      <%= form.select(:subject_id, options_for_select(Subject.all.map{|s|[s.title, s.id]}, @test.try(:subject_id)),{include_blank: "Select Subject"}, {class: "form-control"})%>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="time_required" class="col-xs-3 col-form-label mr-2">Time Required(In minutes):</label>
+    <div class="col-xs-9">
+      <%= form.number_field :time_required , {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="number_of_questions" class="col-xs-3 col-form-label mr-2">Number of Questions:</label>
+    <div class="col-xs-9">
+      <%= form.number_field :number_of_questions , {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="user" class="col-xs-3 col-form-label mr-2">User:</label>
+    <div class="col-xs-9">
+      <%= form.select(:user_id, options_for_select(User.all.map{|s|[s.email, s.id]}, current_user.id),{},{:disabled => true, class: "form-control"})%>
+    </div>
+  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <!-- Category: <%#= form.select :subject_id, options_for_select(Subject.all.map{|s|[s.title, s.id]}) %><br/> -->
+  <!-- Time Required(In minutes): <%#= form.number_field :time_required %><br/> -->
+  <!-- Number of Questions: <%#= form.number_field :number_of_questions %><br/> -->
+  <!-- User: <%#= form.select :user_id, options_for_select(User.all.map{|s|[s.email, s.id]}, current_user.id),{},{:disabled => true} %><br/><br/>  -->
+
+  <!-- <div class="actions">
+    <%#= form.submit %>
+  </div> -->
+  <div class="form-group row">
+    <div class="offset-xs-3 col-xs-9">
+      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+      <%= form.submit "Submit", {class: "btn btn-primary"} %>
+    </div>
   </div>
 <% end %>
+</div>

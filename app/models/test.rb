@@ -1,4 +1,8 @@
 class Test < ApplicationRecord
+  validates :subject_id, presence: true
+  validates :time_required, presence: true
+  validates :number_of_questions, presence: true
+
   belongs_to :subject
   has_many :scores
   

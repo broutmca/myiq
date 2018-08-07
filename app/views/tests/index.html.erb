@@ -10,7 +10,7 @@
         <th> No of questions </th>
         <th> Show</th>
         <th> Edit</th>
-        <th> Destroy</th>
+        <!-- <th> Destroy</th> -->
         <th> Start</th>
       </tr>
     </thead>
@@ -23,7 +23,7 @@
         <td><%= test.number_of_questions %> questions</td>
         <td><%= link_to 'Show', test , class: "btn btn-primary"%></td>
         <td><%= link_to 'Edit', edit_test_path(test) , class: "btn btn-primary"%></td>
-        <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        <!-- <td><%#= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td> -->
         <td> <%= link_to 'Start', test_start_path(test), class: "btn btn-success"%> </td>
       </tr>
       <% end %>
